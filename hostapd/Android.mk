@@ -38,6 +38,12 @@ L_CFLAGS += -Wno-macro-redefined
 # Set Android extended P2P functionality
 L_CFLAGS += -DANDROID_P2P
 
+# Ignore pointer type incompatibility errors
+L_CFLAGS += -Wno-incompatible-pointer-types-discards-qualifiers
+
+# Disable unused function warnings
+L_CFLAGS += -Wno-unused-function
+
 ifeq ($(BOARD_HOSTAPD_PRIVATE_LIB),)
 L_CFLAGS += -DANDROID_LIB_STUB
 endif
