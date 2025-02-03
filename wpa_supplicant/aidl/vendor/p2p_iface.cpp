@@ -1260,7 +1260,7 @@ ndk::ScopedAStatus P2pIface::provisionDiscoveryInternal(
 	}
 	// TODO Handle pairing bootstrapping method when supplicant implementation is ready
 	if (wpas_p2p_prov_disc(
-		wpa_s, peer_address.data(), config_method_str,
+		wpa_s, peer_address.data(), config_method_str, 0,
 		WPAS_P2P_PD_FOR_GO_NEG, nullptr)) {
 		return createStatus(SupplicantStatusCode::FAILURE_UNKNOWN);
 	}

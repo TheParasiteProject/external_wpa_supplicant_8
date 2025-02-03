@@ -708,8 +708,6 @@ KeyMgmtMask convertSupplicantSelectedKeyMgmtForConnectionToAidl(int key_mgmt)
 			return KeyMgmtMask::WAPI_PSK;
 		case WPA_KEY_MGMT_WAPI_CERT:
 			return KeyMgmtMask::WAPI_CERT;
-		case WPA_KEY_MGMT_OSEN:
-			return KeyMgmtMask::OSEN;
 		case WPA_KEY_MGMT_IEEE8021X_SUITE_B_192:
 		case WPA_KEY_MGMT_FT_IEEE8021X_SHA384:
 			return KeyMgmtMask::SUITE_B_192;
@@ -945,8 +943,7 @@ void AidlManager::notifyAnqpQueryDone(
 			misc_utils::convertWpaBufToVector(
 			anqp->hs20_connection_capability);
 		aidl_hs20_anqp_data.osuProvidersList =
-			misc_utils::convertWpaBufToVector(
-			anqp->hs20_osu_providers_list);
+			misc_utils::convertWpaBufToVector(NULL);
 #else
 		aidl_hs20_anqp_data.operatorFriendlyName =
 			misc_utils::convertWpaBufToVector(NULL);

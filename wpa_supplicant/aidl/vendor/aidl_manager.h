@@ -352,10 +352,6 @@ static_assert(
 	WPA_KEY_MGMT_FT_PSK,
 	"KeyMgmt value mismatch");
 static_assert(
-	static_cast<uint32_t>(KeyMgmtMask::OSEN) ==
-	WPA_KEY_MGMT_OSEN,
-	"KeyMgmt value mismatch");
-static_assert(
 	static_cast<uint32_t>(KeyMgmtMask::SAE) ==
 	WPA_KEY_MGMT_SAE,
 	"KeyMgmt value mismatch");
@@ -390,10 +386,6 @@ static_assert(
 static_assert(
 	static_cast<uint32_t>(ProtoMask::RSN) ==
 	WPA_PROTO_RSN,
-	"Proto value mismatch");
-static_assert(
-	static_cast<uint32_t>(ProtoMask::OSEN) ==
-	WPA_PROTO_OSEN,
 	"Proto value mismatch");
 static_assert(
 	static_cast<uint32_t>(ProtoMask::WAPI) ==
@@ -511,11 +503,6 @@ static_assert(
 	static_cast<uint32_t>(
 	Hs20AnqpSubtypes::CONNECTION_CAPABILITY) ==
 	HS20_STYPE_CONNECTION_CAPABILITY,
-	"HS Subtype value mismatch");
-static_assert(
-	static_cast<uint32_t>(
-	Hs20AnqpSubtypes::OSU_PROVIDERS_LIST) ==
-	HS20_STYPE_OSU_PROVIDERS_LIST,
 	"HS Subtype value mismatch");
 
 static_assert(
