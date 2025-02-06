@@ -116,7 +116,8 @@ public:
 	void notifyP2pProvisionDiscovery(
 		struct wpa_supplicant *wpa_s, const u8 *dev_addr, int request,
 		enum p2p_prov_disc_status status, u16 config_methods,
-		unsigned int generated_pin, const char *group_ifname);
+		unsigned int generated_pin, const char *group_ifname,
+		u16 pairing_bootstrapping_method);
 	void notifyP2pSdResponse(
 		struct wpa_supplicant *wpa_s, const u8 *sa, u16 update_indic,
 		const u8 *tlvs, size_t tlvs_len);

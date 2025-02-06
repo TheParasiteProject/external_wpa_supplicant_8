@@ -929,6 +929,7 @@ void wpas_notify_p2p_bootstrap_req(struct wpa_supplicant *wpa_s,
 				   const u8 *src, u16 bootstrap_method)
 {
 	wpas_dbus_signal_p2p_bootstrap_req(wpa_s, src, bootstrap_method);
+	wpas_aidl_notify_p2p_bootstrap_request(wpa_s, src, P2P_SC_SUCCESS, bootstrap_method, NULL);
 }
 
 void wpas_notify_p2p_bootstrap_rsp(struct wpa_supplicant *wpa_s,
@@ -937,6 +938,7 @@ void wpas_notify_p2p_bootstrap_rsp(struct wpa_supplicant *wpa_s,
 {
 	wpas_dbus_signal_p2p_bootstrap_rsp(wpa_s, src, status,
 					   bootstrap_method);
+	wpas_aidl_notify_p2p_bootstrap_response(wpa_s, src, status, bootstrap_method, NULL);
 }
 
 #endif /* CONFIG_P2P */
