@@ -9,12 +9,9 @@
 #ifndef MAINLINE_SUPPLICANT_IMPL_H
 #define MAINLINE_SUPPLICANT_IMPL_H
 
-#include <map>
-
-#include "usd_iface.h"
+#include <set>
 
 #include <aidl/android/system/wifi/mainline_supplicant/BnMainlineSupplicant.h>
-#include <aidl/android/system/wifi/mainline_supplicant/IUsdInterface.h>
 #include <aidl/android/system/wifi/mainline_supplicant/SupplicantStatusCode.h>
 
 extern "C"
@@ -27,22 +24,20 @@ extern "C"
 }
 
 using ::aidl::android::system::wifi::mainline_supplicant::BnMainlineSupplicant;
-using ::aidl::android::system::wifi::mainline_supplicant::IUsdInterface;
 using ::aidl::android::system::wifi::mainline_supplicant::SupplicantStatusCode;
 
 class MainlineSupplicant : public BnMainlineSupplicant {
     public:
         MainlineSupplicant(struct wpa_global* global);
-        ndk::ScopedAStatus addUsdInterface(const std::string& ifaceName,
-            std::shared_ptr<IUsdInterface>* _aidl_return);
+        ndk::ScopedAStatus addUsdInterface(const std::string& ifaceName);
         ndk::ScopedAStatus removeUsdInterface(const std::string& ifaceName);
         ndk::ScopedAStatus terminate();
 
     private:
         // Raw pointer to the global structure maintained by the core
         struct wpa_global* wpa_global_;
-        // Map containing all active USD interfaces, mapped by iface name -> object
-        std::map<std::string, std::shared_ptr<IUsdInterface>> active_usd_ifaces_;
+        // Names of all active USD interfaces
+        std::set<std::string> active_usd_ifaces_;
 };
 
 #endif  // MAINLINE_SUPPLICANT_IMPL_H
