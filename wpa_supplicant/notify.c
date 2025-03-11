@@ -27,6 +27,7 @@
 #include "sme.h"
 #include "notify.h"
 #include "aidl/vendor/aidl.h"
+#include "aidl/mainline/callback_bridge.h"
 
 #ifdef MAINLINE_SUPPLICANT
 #include "aidl/mainline/service.h"
@@ -1532,6 +1533,8 @@ void wpas_notify_nan_discovery_result(struct wpa_supplicant *wpa_s,
 	os_free(ssi_hex);
 
 	wpas_aidl_notify_usd_service_discovered(wpa_s, srv_proto_type,
+		subscribe_id, peer_publish_id, peer_addr, fsd, ssi, ssi_len);
+	mainline_aidl_notify_usd_service_discovered(wpa_s, srv_proto_type,
 		subscribe_id, peer_publish_id, peer_addr, fsd, ssi, ssi_len);
 
 	wpas_dbus_signal_nan_discovery_result(wpa_s, srv_proto_type,
