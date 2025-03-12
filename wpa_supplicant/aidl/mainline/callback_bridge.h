@@ -31,6 +31,17 @@ void mainline_aidl_notify_usd_service_discovered(struct wpa_supplicant *wpa_s,
     enum nan_service_protocol_type srv_proto_type,
     int subscribe_id, int peer_publish_id, const u8 *peer_addr,
     bool fsd, const u8 *ssi, size_t ssi_len);
+void mainline_aidl_notify_usd_publish_replied(struct wpa_supplicant *wpa_s,
+    enum nan_service_protocol_type srv_proto_type,
+    int publish_id, int peer_subscribe_id,
+    const u8 *peer_addr, const u8 *ssi, size_t ssi_len);
+void mainline_aidl_notify_usd_message_received(struct wpa_supplicant *wpa_s, int id,
+    int peer_instance_id, const u8 *peer_addr,
+    const u8 *message, size_t message_len);
+void mainline_aidl_notify_usd_publish_terminated(struct wpa_supplicant *wpa_s,
+    int publish_id, enum nan_de_reason reason);
+void mainline_aidl_notify_usd_subscribe_terminated(struct wpa_supplicant *wpa_s,
+    int subscribe_id, enum nan_de_reason reason);
 
 #else // MAINLINE_SUPPLICANT
 
@@ -38,6 +49,17 @@ static void mainline_aidl_notify_usd_service_discovered(struct wpa_supplicant *w
     enum nan_service_protocol_type srv_proto_type,
     int subscribe_id, int peer_publish_id, const u8 *peer_addr,
     bool fsd, const u8 *ssi, size_t ssi_len) {}
+static void mainline_aidl_notify_usd_publish_replied(struct wpa_supplicant *wpa_s,
+    enum nan_service_protocol_type srv_proto_type,
+    int publish_id, int peer_subscribe_id,
+    const u8 *peer_addr, const u8 *ssi, size_t ssi_len) {}
+static void mainline_aidl_notify_usd_message_received(struct wpa_supplicant *wpa_s, int id,
+    int peer_instance_id, const u8 *peer_addr,
+    const u8 *message, size_t message_len) {}
+static void mainline_aidl_notify_usd_publish_terminated(struct wpa_supplicant *wpa_s,
+    int publish_id, enum nan_de_reason reason) {}
+static void mainline_aidl_notify_usd_subscribe_terminated(struct wpa_supplicant *wpa_s,
+    int subscribe_id, enum nan_de_reason reason) {}
 
 #endif // MAINLINE_SUPPLICANT
 

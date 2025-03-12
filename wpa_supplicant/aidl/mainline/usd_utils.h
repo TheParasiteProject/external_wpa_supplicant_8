@@ -180,4 +180,17 @@ static IStaInterfaceCallback::UsdServiceDiscoveryInfo createUsdServiceDiscoveryI
     return discoveryInfo;
 }
 
+static IStaInterfaceCallback::UsdTerminateReasonCode convertInternalUsdTerminateReasonCodeToAidl(
+        nan_de_reason terminateReason) {
+    switch (terminateReason) {
+        case NAN_DE_REASON_TIMEOUT:
+            return IStaInterfaceCallback::UsdTerminateReasonCode::TIMEOUT;
+        case NAN_DE_REASON_USER_REQUEST:
+            return IStaInterfaceCallback::UsdTerminateReasonCode::USER_REQUESTED;
+        case NAN_DE_REASON_FAILURE:
+        default:
+            return IStaInterfaceCallback::UsdTerminateReasonCode::FAILURE_UNKNOWN;
+    }
+}
+
 #endif // MAINLINE_SUPPLICANT_USD_UTILS_H
