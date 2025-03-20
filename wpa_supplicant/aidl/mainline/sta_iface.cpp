@@ -6,6 +6,7 @@
  * See README for more details.
  */
 
+#include "callback_manager.h"
 #include "sta_iface.h"
 #include "usd_utils.h"
 
@@ -24,8 +25,14 @@ struct wpa_supplicant* StaIface::retrieveIfacePtr() {
 }
 
 ::ndk::ScopedAStatus StaIface::registerCallback(
-        const std::shared_ptr<IStaInterfaceCallback>& in_callback) {
-    return ndk::ScopedAStatus::ok();
+        const std::shared_ptr<IStaInterfaceCallback>& callback) {
+    CallbackManager* callbackManager = CallbackManager::getInstance();
+    WPA_ASSERT(callbackManager);
+    if (callbackManager->registerStaIfaceCallback(iface_name_, callback)) {
+        return ndk::ScopedAStatus::ok();
+    } else {
+        return createStatus(SupplicantStatusCode::FAILURE_UNKNOWN);
+    }
 }
 
 ::ndk::ScopedAStatus StaIface::getUsdCapabilities(UsdCapabilities* _aidl_return) {
