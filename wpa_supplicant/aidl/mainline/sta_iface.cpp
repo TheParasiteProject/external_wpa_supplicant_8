@@ -71,7 +71,18 @@ struct wpa_supplicant* StaIface::retrieveIfacePtr() {
         convertAidlServiceProtoTypeToInternal(
             publishConfig.baseConfig.serviceProtoType),
         ssiBuffer.get(), &nanPublishParams, false /* p2p */);
-    // TODO: Return status code in a callback
+
+    // Core supplicant does not have an internal callback for USD publish,
+    // so invoke the failure callback directly if needed.
+    if (publishId < 0) {
+        wpa_printf(MSG_INFO, "Failed to configure USD publish");
+        auto callback = getStaIfaceCallback(iface_name_);
+        if (callback) {
+            callback->onUsdPublishConfigFailed(
+                cmdId, IStaInterfaceCallback::UsdConfigErrorCode::FAILURE_UNKNOWN);
+        }
+        return createStatus(SupplicantStatusCode::FAILURE_UNKNOWN);
+    }
     return ndk::ScopedAStatus::ok();
 }
 
@@ -98,7 +109,18 @@ struct wpa_supplicant* StaIface::retrieveIfacePtr() {
         convertAidlServiceProtoTypeToInternal(
             subscribeConfig.baseConfig.serviceProtoType),
         ssiBuffer.get(), &nanSubscribeParams, false /* p2p */);
-    // TODO: Return status code in a callback
+
+    // Core supplicant does not have an internal callback for USD subscribe,
+    // so invoke the failure callback directly if needed.
+    if (subscribeId < 0) {
+        wpa_printf(MSG_INFO, "Failed to configure USD subscribe");
+        auto callback = getStaIfaceCallback(iface_name_);
+        if (callback) {
+            callback->onUsdSubscribeConfigFailed(
+                cmdId, IStaInterfaceCallback::UsdConfigErrorCode::FAILURE_UNKNOWN);
+        }
+        return createStatus(SupplicantStatusCode::FAILURE_UNKNOWN);
+    }
     return ndk::ScopedAStatus::ok();
 }
 
