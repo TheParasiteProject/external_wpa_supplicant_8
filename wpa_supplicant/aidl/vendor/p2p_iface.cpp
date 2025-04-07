@@ -2141,9 +2141,9 @@ P2pIface::startUsdBasedServiceDiscoveryInternal(
 
 	os_memset(&params, 0, sizeof(params));
 
-	if (serviceDiscoveryConfig.serviceSpecificInfo.size() > 0) {
-		auto ssiBuffer = misc_utils::convertVectorToWpaBuf(
+	auto ssiBuffer = misc_utils::convertVectorToWpaBuf(
 			serviceDiscoveryConfig.serviceSpecificInfo);
+	if (serviceDiscoveryConfig.serviceSpecificInfo.size() > 0) {
 		if (ssiBuffer && ssiBuffer.get() != nullptr) {
 			service_specific_info = ssiBuffer.get();
 		}
@@ -2166,9 +2166,7 @@ P2pIface::startUsdBasedServiceDiscoveryInternal(
 					      (enum nan_service_protocol_type)
 						  serviceDiscoveryConfig.serviceProtocolType,
 						  service_specific_info, &params, true);
-	if (service_specific_info != NULL) {
-		freeWpaBuf(service_specific_info);
-	}
+
 	if (sessionId > 0) {
 		return {sessionId, ndk::ScopedAStatus::ok()};
 	}
@@ -2200,9 +2198,9 @@ P2pIface::startUsdBasedServiceAdvertisementInternal(
 	struct wpabuf *service_specific_info = NULL;
 	os_memset(&params, 0, sizeof(params));
 
-	if (serviceAdvertisementConfig.serviceSpecificInfo.size() > 0) {
-		auto ssiBuffer = misc_utils::convertVectorToWpaBuf(
+	auto ssiBuffer = misc_utils::convertVectorToWpaBuf(
 			serviceAdvertisementConfig.serviceSpecificInfo);
+	if (serviceAdvertisementConfig.serviceSpecificInfo.size() > 0) {
 		if (ssiBuffer && ssiBuffer.get() != nullptr) {
 			service_specific_info = ssiBuffer.get();
 		}
@@ -2215,9 +2213,7 @@ P2pIface::startUsdBasedServiceAdvertisementInternal(
 					      (enum nan_service_protocol_type)
 						  serviceAdvertisementConfig.serviceProtocolType,
 						  service_specific_info, &params, true);
-	if (service_specific_info != NULL) {
-		freeWpaBuf(service_specific_info);
-	}
+
 	if (sessionId > 0) {
 		return {sessionId, ndk::ScopedAStatus::ok()};
 	}
