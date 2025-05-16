@@ -1348,6 +1348,7 @@ wpa_supplicant_cc_binary {
             init_rc: ["aidl/vendor/android.hardware.wifi.supplicant-service.rc"],
         },
     },
+    vintf_fragment_modules: ["android.hardware.wifi.supplicant.xml"],
 }
 
 wpa_supplicant_cc_binary {
