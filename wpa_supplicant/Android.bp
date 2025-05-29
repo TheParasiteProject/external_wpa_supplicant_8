@@ -1267,6 +1267,9 @@ cc_defaults {
 cc_binary {
     name: "wpa_cli",
     proprietary: true,
+    cflags: [
+        "-DCONFIG_NAN_USD",
+    ],
     srcs: [
         "wpa_cli.c",
         "src/common/cli.c",
