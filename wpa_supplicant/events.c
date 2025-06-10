@@ -6304,7 +6304,11 @@ static bool is_event_allowlisted(enum wpa_event_type event) {
 	       event == EVENT_RX_MGMT ||
 	       event == EVENT_REMAIN_ON_CHANNEL ||
 	       event == EVENT_CANCEL_REMAIN_ON_CHANNEL ||
-	       event == EVENT_TX_WAIT_EXPIRE;
+	       event == EVENT_TX_WAIT_EXPIRE ||
+	       event == EVENT_INTERFACE_MAC_CHANGED ||
+	       event == EVENT_INTERFACE_ENABLED ||
+	       event == EVENT_INTERFACE_DISABLED ||
+	       event == EVENT_TX_STATUS;
 }
 #endif /* MAINLINE_SUPPLICANT */
 
